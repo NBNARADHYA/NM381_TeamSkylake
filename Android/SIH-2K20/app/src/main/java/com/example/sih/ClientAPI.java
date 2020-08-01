@@ -15,3 +15,6 @@ public interface ClientAPI {
             @Field ("angle_of_elevation") float angle
     );
 }
+
+
+/// we are trying to get elevation angle here
