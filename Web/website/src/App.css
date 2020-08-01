@@ -21,6 +21,15 @@
 		background-position: 0% 50%;
 	}
 } */
+.heading{
+  position: absolute;
+  top: 8vh;
+  font-size: 3em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: white;
+  font-family: "Lucida Console", Courier, monospace;
+}
 .dzu-dropzone{
     position: absolute;
     top: 100vh;

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import ReactDropzoneUploader from 'react-dropzone-uploader';
+import Dropzone from './components/Dropzone';
 import Home from './components/Home';
 import 'react-dropzone-uploader/dist/styles.css';
 import StarfieldAnimation from 'react-starfield-animation';
+import Axios from 'axios';
 import './App.css';
 
 let max_offset,initial_offset;
@@ -93,6 +95,9 @@ class App extends Component {
   const { imgUrl,s,elevation } = this.state;
   return (
     <div className="App">
+      <div className="heading">
+          SIH 2020 NM381
+      </div>
         <StarfieldAnimation
         style={{
           position: 'absolute',
@@ -100,17 +105,6 @@ class App extends Component {
           height: '100%'
         }}
       />
-      <div
-        style = {{
-          position: 'absolute',
-          top: '8px',
-          zIndex: 10,
-          fontSize: '3.5em',
-          color: 'white'
-        }}
-      >
-        SIH_2020_NM381
-      </div>
       <Home makeShowLogo={this.makeShowLogo} hideLogo={this.hideLogo}/>
       
     {!s&&  <ReactDropzoneUploader
