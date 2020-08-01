@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactDropzoneUploader from 'react-dropzone-uploader';
-import Dropzone from './components/Dropzone';
 import Home from './components/Home';
 import 'react-dropzone-uploader/dist/styles.css';
 import StarfieldAnimation from 'react-starfield-animation';
