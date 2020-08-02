@@ -1,1 +1,2 @@
 This is a react-based web implementation of the solution of PSID:NM381.
+It uses React DropZone uploader which internally uses axios to generate a get request from the server and get the masked image in response.

@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       header: false,
       s: false,
-      elevation: 15.70795,
+      elevation: '',
       imgUrl: '',
       preUrl: '',
     };
