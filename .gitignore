@@ -22,3 +22,6 @@ Web/website/.env.production.local
 Web/website/npm-debug.log*
 Web/website/yarn-debug.log*
 Web/website/yarn-error.log*
+
+##Server
+Server/static
