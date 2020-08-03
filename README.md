@@ -7,6 +7,10 @@ https://docs.google.com/presentation/d/1o55oXnzfp19Sy6HjDW_XEgdmVyPkc0L--XAyHjT4
 #### [Android app apk](https://drive.google.com/file/d/17NIiGfxXryZxkhsEZoDY4JC0C-JDRMxz/view?usp=sharing)
 
 
+### DEMO
+![](demo.gif)
+
+
 ### DATA SET USED
 A large dataset of webcam images annotated with sky regions(90,000)
   **SOURCE:** Nathan Jacobs Group
