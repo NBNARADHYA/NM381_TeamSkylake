@@ -31,3 +31,6 @@ IOU (Intersection over Union)
      → Gradually increased to 70 percent  in step of 5
      → this was used along with 5 fold cross validation due to the lack of diversity in images
      → tested on 30 percent images
+### IOU on Validation   : → 0.9959
+### IOU on Test         : → 0.9835
+
