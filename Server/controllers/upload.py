@@ -86,8 +86,8 @@ def Upload():
         #if 'url' not in request.orgs:
          #   return jsonify({"error": "No image url in the request"}), 400
         url = request.form['url']
-        fov = request.form['fov']
-        gamma = request.form['gamma']
+        fov = float(request.form['fov'])
+        gamma = float(request.form['gamma'])
         if(gamma < 0):
             gamma = np.abs(gamma)
             gamma = gamma * 57.2958
