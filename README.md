@@ -8,7 +8,9 @@ https://docs.google.com/presentation/d/1o55oXnzfp19Sy6HjDW_XEgdmVyPkc0L--XAyHjT4
 
 
 ### DEMO
-![](demo.gif)
+<p align="center">
+  <img src="demo.gif" alt="animated" />
+</p>
 
 
 ### DATA SET USED
