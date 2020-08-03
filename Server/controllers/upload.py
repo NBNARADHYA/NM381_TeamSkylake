@@ -2,7 +2,7 @@ from flask import flash, request, jsonify
 from werkzeug.utils import secure_filename
 from albumentations import Resize
 from main import final as model
-
+                    # imported the requests library 
 import requests 
 import string 
 import random 
@@ -86,7 +86,18 @@ def Upload():
         #if 'url' not in request.orgs:
          #   return jsonify({"error": "No image url in the request"}), 400
         url = request.form['url']
+        fov = request.form['fov']
+        gamma = request.form['gamma']
+        if(gamma < 0):
+            gamma = np.abs(gamma)
+            gamma = gamma * 57.2958
+            gamma = gamma + 90
+        else:
+            gamma = gamma * 57.2958
+            
         print(url)
+        print(fov)
+        print(gamma)
         #if url and allowed_file(url):
         # URL of the image to be downloaded is defined as image_url 
         r = requests.get(url) # create HTTP response object 
@@ -146,7 +157,7 @@ def Upload():
         final_image = cv2.addWeighted(redMask, alpha, im, 1 - alpha, 0, im)
         cv2.imwrite(filename, final_image)
         
-        angleOfElevation = generate_angle(op, 120, 0.78)
+        angleOfElevation = generate_angle(op, gamma, fov)
         fig, ax = plt.subplots( nrows=1, ncols=1 )
         ax.plot(angleOfElevation)
         angle_plot_image_filename=os.path.join(UPLOAD_FOLDER, "angle_plot_img.jpg")
