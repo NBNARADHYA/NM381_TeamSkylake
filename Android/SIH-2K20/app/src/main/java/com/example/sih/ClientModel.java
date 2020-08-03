@@ -7,20 +7,12 @@ public class ClientModel implements Serializable
 {
     private String url;
     int status;
-    float angle;
+    String url2;
 
-    public ClientModel(String url, int status, float angle) {
+    public ClientModel(String url, int status, String url2) {
         this.url = url;
         this.status = status;
-        this.angle = angle;
-    }
-
-    public float getAngle() {
-        return angle;
-    }
-
-    public void setAngle(float angle) {
-        this.angle = angle;
+        this.url2 = url2;
     }
 
     public String getUrl() {
@@ -37,5 +29,13 @@ public class ClientModel implements Serializable
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getUrl2() {
+        return url2;
+    }
+
+    public void setUrl2(String url2) {
+        this.url2 = url2;
     }
 }

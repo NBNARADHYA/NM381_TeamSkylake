@@ -30,19 +30,21 @@ public class Calculation extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
   String url;
-  ImageView image;
+  ImageView image,image2;
   Button angleb,datab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculation);
         String url=getIntent().getStringExtra("urlsend");
+        String url1=getIntent().getStringExtra("url1");
+        Log.e("findurl",url1);
         image=findViewById(R.id.responseimage);
-        angleb=findViewById(R.id.angle);
-
-        datab=findViewById(R.id.data);
+        image2=findViewById(R.id.image2);
+      //  url1=http://34.69.240.165:3000/angle_plot_img.jpg;
 
         Glide.with(this).load(url).into(image);
+        Glide.with(this).load(url1).into(image2);
        Log.e("ggg",url);
         Log.e("gggg","aagya");
 

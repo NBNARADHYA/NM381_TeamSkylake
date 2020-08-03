@@ -7,15 +7,6 @@
     android:background="@drawable/backg"
     tools:context=".Calculation">
 
-    <Button
-        android:id="@+id/angle"
-        android:layout_width="144dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="130dp"
-        android:text="angle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/responseimage" />
-
     <ImageView
         android:id="@+id/responseimage"
         android:layout_width="256dp"
@@ -25,36 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/data"
-        android:layout_width="144dp"
-        android:layout_height="72dp"
-        android:text="data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/angle" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@color/common_google_signin_btn_text_dark_pressed"
-        android:gravity="center_horizontal"
-        android:text="63.75623145"
-        android:textSize="30sp"
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="265dp"
+        android:layout_height="213dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/angle" />
+        app:layout_constraintTop_toBottomOf="@+id/responseimage"
+        app:layout_constraintVertical_bias="0.106"
+        app:srcCompat="@drawable/ic_arrow_back_white" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/common_google_signin_btn_text_dark_pressed"
-        android:gravity="center_horizontal"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
