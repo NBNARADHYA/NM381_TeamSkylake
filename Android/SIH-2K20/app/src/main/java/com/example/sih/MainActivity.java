@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -26,6 +27,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -64,6 +66,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.Policy;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -80,8 +85,10 @@ public class MainActivity extends AppCompatActivity {
     float x2;
     float x,y,z;
     TextView xyza,anglea;
+    private String mCameraFileName;
 
-  //  Camera mcamera;
+
+    //  Camera mcamera;
 
     TextView tvIsConnected;
     EditText etName,etCountry,etTwitter;
@@ -101,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         xyza=findViewById(R.id.xyz);
         anglea=findViewById(R.id.angl);
+        x2=(float)1.1568369;
 
 
 //        mcamera = Camera.open();
@@ -159,9 +167,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final int CHOOSE_CAMERA = 232;
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(cameraIntent, 0);
 
-                startActivityForResult(cameraIntent, 0);
+
+                Intent intent = new Intent();
+                // Picture from camera
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                // This is not the right way to do this, but for some reason, having
+                // it store it in
+                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
+
+//                Date date = new Date();
+//                DateFormat df = new SimpleDateFormat("-mm-ss");
+//
+//                String newPicFile = "Bild"+ df.format(date) + ".jpg";
+//                String outPath = "/sdcard/" + newPicFile;
+//                File outFile = new File(outPath);
+//
+//                mCameraFileName = outFile.toString();
+//                Uri outuri = Uri.fromFile(outFile);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
+
+
+                startActivityForResult(intent, 0);
+
+
+
                 SensorManager.getRotationMatrix(mRotationMatrix, null, mValuesAccel, mValuesMagnet);
                 SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
                 final CharSequence test;
@@ -199,6 +232,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private Uri mImageUri = null;
+
+    private static final  int GALLERY_REQUEST =1;
+
+    private static final int CAMERA_REQUEST_CODE=1;
+
+    private StorageReference mStorage;
 
     public void setListners(SensorManager sensorManager, SensorEventListener mEventListener)
     {
@@ -232,29 +272,40 @@ public class MainActivity extends AppCompatActivity {
 //        storageRef = storage.getReferenceFromUrl("link to storage");
 //
 //    }
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
         switch (requestCode) {
             case 0:
                 try{
                     Uri selectedImageUri  = imageReturnedIntent.getData();
 
+
+                    filePath=selectedImageUri;
                     Log.e("selectedImageUri "," = " + selectedImageUri);
                     if(selectedImageUri!=null){
 
                         Bitmap bmp= BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
                         Log.e("bmp "," = " + bmp);
                         imageb.setImageBitmap(bmp);
+                        String result = MediaStore.Images.Media.insertImage(getContentResolver(), bmp, "", "");
+
+                        filePath = Uri.parse(result);
                         Log.e("bmp ", " Displaying Imageview WIth Bitmap !!!!  = ");
                     } else {
                         // If selectedImageUri is null check extras for bitmap
 
                         Bitmap bmp = (Bitmap) imageReturnedIntent.getExtras().get("data");
                        // Uri thumbUri = getImageUri(this, bmp);
-                      //  filePath=getImageUri(this,bmp);
+                      // filePath=getImageUri(this,bmp);
+                        String result = MediaStore.Images.Media.insertImage(getContentResolver(), bmp, "", "");
 
+                        filePath = Uri.parse(result);
                         imageb.setImageBitmap(bmp);
                     }
+
                 }
                 catch (FileNotFoundException fe)
                 {
@@ -463,11 +514,6 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //dismissing the progress dialog
-                            progressDialog.dismiss();
-
-                            //displaying success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
-
 
                             //creating the upload object to store uploaded image details
                             Upload upload = new Upload(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
@@ -483,13 +529,19 @@ public class MainActivity extends AppCompatActivity {
                                     url1=url;
                                     Log.e("urllll",url);
 
-                                    clientAPI.search(url, (int) 70.00,url1).enqueue(new Callback<ResponseClient>() {
+                                    clientAPI.search(url, (int) 70.00,url1,x2,y).enqueue(new Callback<ResponseClient>() {
                                         @Override
                                         public void onResponse(Call<ResponseClient> call, Response<ResponseClient> response) {
                                             Log.e("vjh","hhb");
                                             if (response.isSuccessful()) {
                                                  responseurl=response.body().getUrl();
                                                  url1=response.body().getUrl1();
+                                                progressDialog.dismiss();
+
+                                                //displaying success toast
+                                                Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+
+
                                                 Intent i = new Intent(MainActivity.this, Calculation.class);
                                                 i.putExtra("urlsend",responseurl);
                                                 Log.e("bhaotho",url1);

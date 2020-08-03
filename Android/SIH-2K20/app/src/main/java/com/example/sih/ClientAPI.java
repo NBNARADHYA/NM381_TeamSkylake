@@ -12,6 +12,8 @@ public interface ClientAPI {
     Call<ResponseClient> search(
             @Field("url") String url,
             @Field("error") int status,
-            @Field ("angle_plot_img_path") String url2
+            @Field ("angle_plot_img_path") String url2,
+            @Field("fov") float fov,
+            @Field("gamma") float gamma
     );
 }
